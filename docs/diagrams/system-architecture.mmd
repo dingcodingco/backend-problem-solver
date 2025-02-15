@@ -1,0 +1,20 @@
+graph TB
+    Client[Client] --> LB[Load Balancer]
+    LB --> API[Spring Boot API Server]
+    
+    subgraph Backend
+        API --> Security[Spring Security]
+        API --> Services[Services]
+        Services --> Repositories[Repositories]
+        Repositories --> DB[(MySQL)]
+    end
+
+    subgraph Monitoring
+        API --> Prometheus[Prometheus]
+        Prometheus --> Grafana[Grafana Dashboard]
+        K6[k6 Load Testing] --> API
+    end
+
+    subgraph Cache Layer
+        Services --> Cache[(Cache)]
+    end

@@ -1,0 +1,30 @@
+```mermaid
+graph TD
+    subgraph Controllers
+        AC[AuthController]
+        BC[BoardController]
+        MC[MemberController]
+    end
+
+    subgraph Services
+        AS[AuthService]
+        BS[BoardService]
+        MS[MemberService]
+    end
+
+    subgraph Repositories
+        BR[BoardRepository]
+        MR[MemberRepository]
+        TR[TagRepository]
+        BLR[BoardLikeRepository]
+    end
+
+    AC --> AS
+    BC --> BS
+    MC --> MS
+
+    BS --> BR
+    BS --> TR
+    BS --> BLR
+    MS --> MR
+```

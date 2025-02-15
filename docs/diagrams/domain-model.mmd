@@ -1,0 +1,57 @@
+classDiagram
+    class Member {
+        -Long id
+        -String email
+        -String password
+        -String nickname
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +List<Board> boards
+        +List<BoardLike> likes
+    }
+
+    class Board {
+        -Long id
+        -String title
+        -String content
+        -Category category
+        -int viewCount
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +Member member
+        +List<BoardTag> boardTags
+        +List<BoardLike> likes
+    }
+
+    class Category {
+        <<enumeration>>
+        NOTICE
+        FREE
+        QUESTION
+        TECH
+    }
+
+    class BoardTag {
+        -Long id
+        +Board board
+        +Tag tag
+    }
+
+    class Tag {
+        -Long id
+        -String name
+        +List<BoardTag> boardTags
+    }
+
+    class BoardLike {
+        -Long id
+        +Member member
+        +Board board
+    }
+
+    Member "1" --> "*" Board : writes
+    Member "1" --> "*" BoardLike : gives
+    Board "1" --> "*" BoardTag : has
+    Board "1" --> "*" BoardLike : receives
+    Board "*" --> "1" Category : belongs to
+    Tag "1" --> "*" BoardTag : used in

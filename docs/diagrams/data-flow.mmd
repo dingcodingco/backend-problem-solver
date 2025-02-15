@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant C as Client
+    participant API as API Server
+    participant S as Service Layer
+    participant R as Repository
+    participant DB as Database
+
+    C->>API: HTTP Request
+    API->>S: DTO
+    S->>R: Entity
+    R->>DB: SQL Query
+    DB-->>R: Result Set
+    R-->>S: Entity
+    S-->>API: DTO
+    API-->>C: HTTP Response

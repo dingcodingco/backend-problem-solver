@@ -1,0 +1,31 @@
+spring:
+  sql:
+    init:
+      mode: never  # 테스트 환경에서는 mock-data.sql 실행하지 않음
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        session_factory:
+          statement_inspector: ding.co.backendportfolio.chapter5.config.QueryCountInspector
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: TRACE
